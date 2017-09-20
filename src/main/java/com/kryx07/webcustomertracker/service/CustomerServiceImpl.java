@@ -9,22 +9,31 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerDAO customerDAO;
 
     @Override
-    @Transactional
+//    @Transactional
     public List<Customer> getCustomers() {
         return customerDAO.getCustomers();
     }
 
     @Override
-    @Transactional
-    public void addCustomer(Customer customer) {
-        customerDAO.addCustomer(customer);
+//    @Transactional
+    public Customer getCustomer(int id) {
+        return customerDAO.getCustomer(id);
     }
+
+
+    @Override
+//    @Transactional
+    public void addCustomer(Customer customer) {
+        customerDAO.saveCustomer(customer);
+    }
+
 
 
 }
