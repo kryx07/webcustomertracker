@@ -3,6 +3,7 @@ package com.kryx07.webcustomertracker.dao;
 import com.kryx07.webcustomertracker.entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +41,12 @@ public class CustomerDAOImpl implements CustomerDAO {
                 .get(Customer.class, id);
     }
 
+    @Override
+    public void deleteCustomer(int id) {
+        Query query = sessionFactory.getCurrentSession().createQuery("delete from Customer where id=:idToDelete");
+        query.setParameter("idToDelete",id);
+        query.executeUpdate();
+    }
 
 
 }
